@@ -189,3 +189,10 @@ button {
   background: #222;
   border-color: #444;
 }
+.post {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: white;
+}
