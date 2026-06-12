@@ -1,8 +1,6 @@
 console.log("JS connected!");
 
-// Дані
-
-const myProjects = [
+const projects = [
   {
     id: 1,
     title: "Сайт-візитка",
@@ -10,29 +8,46 @@ const myProjects = [
   },
   {
     id: 2,
-    title: "Магазин",
+    title: "Todo App",
     tech: "JavaScript"
+  },
+  {
+    id: 3,
+    title: "Портфоліо",
+    tech: "HTML/CSS/JS"
   }
 ];
 
-console.log(myProjects[0]);
-console.log(myProjects[0].title);
+function createProjectCard(project) {
+  return `
+    <div class="project-card">
+      <h3>${project.title}</h3>
+      <p>${project.tech}</p>
+    </div>
+  `;
+}
+
+console.log(projects[0]);
+console.log(projects[0].title);
 
 // Відображення проєктів
 
-const list = document.querySelector('#projects-list');
+const container =
+  document.querySelector('#projects-container');
 
-if (list) {
-  myProjects.forEach(project => {
-    const li = document.createElement('li');
+function renderProjects(list) {
+  if (!container) return;
 
-    li.textContent =
-      `${project.title} (${project.tech})`;
+  const html = list
+    .map(project =>
+      createProjectCard(project)
+    )
+    .join('');
 
-    list.appendChild(li);
-  });
+  container.innerHTML = html;
 }
 
+renderProjects(projects);
 // Перемикач теми
 
 const themeBtn =
@@ -95,4 +110,26 @@ if (form && nameInput) {
       form.reset();
     }
   });
+}
+
+const searchInput =
+  document.querySelector('#search-input');
+
+if (searchInput) {
+  searchInput.addEventListener(
+    'input',
+    () => {
+      const value =
+        searchInput.value.toLowerCase();
+
+      const filtered =
+        projects.filter(project =>
+          project.title
+            .toLowerCase()
+            .includes(value)
+        );
+
+      renderProjects(filtered);
+    }
+  );
 }
