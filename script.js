@@ -1,5 +1,6 @@
 console.log("JS connected!");
 
+
 const projects = [
   {
     id: 1,
@@ -133,9 +134,30 @@ if (searchInput) {
     }
   );
 }
+
+let allPosts = [];
+
+const postsContainer =
+  document.querySelector('#posts-container');
+
+function renderPosts(list) {
+  if (!postsContainer) return;
+
+  const html = list
+    .map(post => `
+      <div class="post">
+        <h3>${post.title}</h3>
+        <p>${post.body}</p>
+      </div>
+    `)
+    .join('');
+
+  postsContainer.innerHTML = html;
+}
+
 async function loadPosts() {
-  const loading = document.querySelector('#loading');
-  const container = document.querySelector('#posts-container');
+  const loading =
+    document.querySelector('#loading');
 
   try {
     const response = await fetch(
@@ -143,30 +165,43 @@ async function loadPosts() {
     );
 
     if (!response.ok) {
-      throw new Error('Server error');
+      throw new Error('Помилка сервера');
     }
 
     const data = await response.json();
 
-    const html = data
-      .slice(0, 5)
-      .map(post => `
-        <div class="post">
-          <h3>${post.title}</h3>
-          <p>${post.body}</p>
-        </div>
-      `)
-      .join('');
+    allPosts = data.slice(0, 10);
 
-    container.innerHTML = html;
+    renderPosts(allPosts);
 
     loading.style.display = 'none';
 
   } catch (error) {
     console.error(error);
+
     loading.textContent =
-      'Помилка завантаження даних';
+      'Помилка завантаження';
   }
 }
-
 loadPosts();
+const postsSearchInput =
+  document.querySelector('#search-input-posts');
+
+if (postsSearchInput) {
+  postsSearchInput.addEventListener(
+    'input',
+    () => {
+      const value =
+        postsSearchInput.value.toLowerCase();
+
+      const filtered =
+        allPosts.filter(post =>
+          post.title
+            .toLowerCase()
+            .includes(value)
+        );
+
+      renderPosts(filtered);
+    }
+  );
+}
