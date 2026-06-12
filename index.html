@@ -72,12 +72,40 @@
                 <p>Email: example@gmail.com</p>
             </article>
         </section>
+        <section id="projects">
+    <h2>Проєкти</h2>
+    <ul id="projects-list"></ul>
+</section>
+
+<section>
+    <h2>Інтерактивність</h2>
+
+    <button id="theme-toggle">Змінити тему</button>
+    <button id="open-modal">Контакти</button>
+</section>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <button id="close-modal">Закрити</button>
+
+        <form id="contact-form">
+            <input
+                type="text"
+                id="user-name"
+                placeholder="Ваше ім'я"
+                required
+            >
+
+            <button type="submit">Надіслати</button>
+        </form>
+    </div>
+</div>
 
     </main>
 
     <footer>
         <p>© 2026 Ваше ім'я</p>
     </footer>
-
+    <script src="script.js"></script>
 </body>
 </html>

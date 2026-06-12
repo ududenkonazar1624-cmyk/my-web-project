@@ -105,3 +105,55 @@ nav a:hover {
     align-items: center;
   }
 }
+.dark-theme {
+  background-color: #111;
+  color: #fff;
+}
+
+.dark-theme article {
+  background-color: #222;
+}
+
+.dark-theme a {
+  color: #93c5fd;
+}
+
+button {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.modal {
+  display: none;
+
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.is-open {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: min(90%, 400px);
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 1rem 0;
+}
+
+.dark-theme .modal-content {
+  background: #222;
+  color: white;
+}
